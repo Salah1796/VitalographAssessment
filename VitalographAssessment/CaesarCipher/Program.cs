@@ -8,18 +8,28 @@
         public const int DefaultShift = 5;
         public static void Main(string[] args)
         {
-            string output = "";
-            Console.Write("Input: ");
             string input = GetInputString();
             if (input.Equals("exit", StringComparison.CurrentCultureIgnoreCase))
             {
                 Console.WriteLine("Exiting program...");
                 return;
             }
-            int shift = GetShiftValue();
-            output = CaesarCipher.Encrypt(input, shift);
+            EncryptAndPrintResult(input, GetShiftValue());
+        }
 
-            Console.WriteLine("Output: " + output);
+        private static void EncryptAndPrintResult(string input, int shift)
+        {
+            try
+            {
+                string encrypted = CaesarCipher.Encrypt(input, shift);
+                string result = "Output: " + encrypted;
+                Console.WriteLine(result);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = "An unexpected error occurred: " + ex.Message;
+                Console.WriteLine(errorMessage);
+            }
         }
 
         /// <summary>
