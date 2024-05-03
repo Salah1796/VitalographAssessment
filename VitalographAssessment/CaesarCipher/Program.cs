@@ -7,7 +7,6 @@ using VitalographAssessment.Helper;
 using VitalographAssessment.Helper.Interfaces;
 using VitalographAssessment.Interfaces;
 
-
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
