@@ -67,7 +67,7 @@ namespace VitalographAssessment
                 isValid = IsValidInput(input);
                 if (!isValid)
                 {
-                    Console.WriteLine("LogError: Input cannot be null or empty and  should contain only characters between A-Z.");
+                    Console.WriteLine("Error: Input cannot be null or empty and  should contain only characters between A-Z.");
                     Log.Warning("Invalid user Input {input}.", input);
                 }
             } while (!isValid);
