@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaesarCipher", "CaesarCipher\CaesarCipher.csproj", "{2EC66DA5-8DE1-4313-9563-357EB2204EAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VitalographAssessment", "CaesarCipher\VitalographAssessment.csproj", "{2EC66DA5-8DE1-4313-9563-357EB2204EAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VitalographAssessmentTest", "CaesarCipherTest\VitalographAssessmentTest.csproj", "{583E7D21-3C40-4274-96D7-6D383151CB5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2EC66DA5-8DE1-4313-9563-357EB2204EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC66DA5-8DE1-4313-9563-357EB2204EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC66DA5-8DE1-4313-9563-357EB2204EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583E7D21-3C40-4274-96D7-6D383151CB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583E7D21-3C40-4274-96D7-6D383151CB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583E7D21-3C40-4274-96D7-6D383151CB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583E7D21-3C40-4274-96D7-6D383151CB5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
