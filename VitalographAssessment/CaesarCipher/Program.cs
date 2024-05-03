@@ -35,6 +35,11 @@
                     Console.WriteLine("Error: Input string cannot be null or empty.");
                     isValid = false;
                 }
+                else if (input != "exit" && input.Any(ch => ch < 'A' || ch > 'Z'))
+                {
+                    Console.WriteLine("Error: Input should contain only characters between A-Z.");
+                    isValid = false;
+                }
                 else
                     isValid = true;
             } while (!isValid);
