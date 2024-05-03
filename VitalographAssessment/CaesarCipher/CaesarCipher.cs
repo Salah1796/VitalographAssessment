@@ -19,7 +19,7 @@ namespace Encryption.CaesarCipher
             StringBuilder encryptedText = new();
             foreach (char character in input)
             {
-                if (character < 'A' || character > 'Z')
+                if (!ValidCharacter(character))
                     throw new ArgumentOutOfRangeException($"'{character}' is out of range (Only A-Z supported.)");
                 int shifted = character + shift;
                 if (shifted > 'Z')
@@ -28,5 +28,13 @@ namespace Encryption.CaesarCipher
             }
             return encryptedText.ToString();
         }
+
+
+        /// <summary>
+        /// Validates the character between A-Z 
+        /// </summary>
+        /// <param name="character">The character  to validate</param>
+        /// <returns>True if the character is valid; otherwise, false.</returns>
+        public static bool ValidCharacter(char character) => character >= 'A' && character <= 'Z';
     }
 }

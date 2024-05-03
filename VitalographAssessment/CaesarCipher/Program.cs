@@ -7,6 +7,8 @@ namespace Encryption.CaesarCipher
         /// The default shift value used for encryption if no shift value is provided.
         /// </summary>
         const int DefaultShift = 5;
+        private const string ExitCommand = "exit";
+        private const string ContinueCommand = "Y";
 
         public static void Main(string[] args)
         {
@@ -22,18 +24,18 @@ namespace Encryption.CaesarCipher
             do
             {
                 string input = GetInputString();
-                if (input.Equals("exit", StringComparison.CurrentCultureIgnoreCase))
+                if (input.Equals(ExitCommand, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    Log.Information("User type 'exit' Exiting program...");
+                    Log.Information("User type {exit} Exiting program...", input);
                     Console.WriteLine("Exiting program...");
                     break;
                 }
                 int shift = GetShiftValue();
                 EncryptAndPrintResult(input, shift);
-                Log.Debug("Waiting for user type Y or N to continue ");
-                Console.Write("Do you want to continue (Y/N)? ");
+                Log.Debug("Waiting for user type {ContinueCommand} to continue ", ContinueCommand);
+                Console.Write($"Do you want to continue ({ContinueCommand}/N)? ");
                 string? response = Console.ReadLine();
-                continueProgram = response?.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ?? false;
+                continueProgram = response?.Trim().Equals(ContinueCommand, StringComparison.OrdinalIgnoreCase) ?? false;
                 if (!continueProgram)
                     Log.Information($"User type {response} Exiting program...");
             } while (continueProgram);
@@ -67,26 +69,18 @@ namespace Encryption.CaesarCipher
         private static string GetInputString()
         {
             Log.Debug("Waiting for user input...");
-            bool isValid = false;
-            string? input = string.Empty;
+            bool isValid;
+            string? input;
             do
             {
                 Console.Write("Enter a message to encrypt containing characters between A-Z (type 'exit' to close): ");
                 input = Console.ReadLine();
-                if (string.IsNullOrEmpty(input))
+                isValid = IsValidInput(input);
+                if (!isValid)
                 {
-                    Log.Warning("Empty input string provided.");
-                    Console.WriteLine("Error: Input string cannot be null or empty.");
-                    isValid = false;
+                    Console.WriteLine("Error: Input annot be null or empty and  should contain only characters between A-Z.");
+                    Log.Warning("Invalid user Input {input}.", input);
                 }
-                else if (input != "exit" && input.Any(ch => ch < 'A' || ch > 'Z'))
-                {
-                    Log.Warning("Invalid characters detected. Please enter only characters between A-Z.");
-                    Console.WriteLine("Error: Input should contain only characters between A-Z.");
-                    isValid = false;
-                }
-                else
-                    isValid = true;
             } while (!isValid);
             return input!;
         }
@@ -115,6 +109,18 @@ namespace Encryption.CaesarCipher
                 }
             } while (shift == 0);
             return shift;
+        }
+
+        /// <summary>
+        /// Validates the input string to ensure it not null or empty and  contains characters between A-Z or is the exit command.
+        /// </summary>
+        /// <param name="input">The input string to validate.</param>
+        /// <returns>True if the input is valid; otherwise, false.</returns>
+        private static bool IsValidInput(string? input)
+        {
+            if (string.IsNullOrEmpty(input) || (input != ExitCommand && input.Any(ch => !CaesarCipher.ValidCharacter(ch))))
+                return false;
+            return true;
         }
     }
 }
