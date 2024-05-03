@@ -2,9 +2,12 @@
 {
     public class Program
     {
+        /// <summary>
+        /// The default shift value used for encryption if no shift value is provided by user
+        /// </summary>
+        public const int DefaultShift = 5;
         public static void Main(string[] args)
         {
-            int shift = 5;
             string output = "";
             Console.Write("Input: ");
             string input = GetInputString();
@@ -13,8 +16,9 @@
                 Console.WriteLine("Exiting program...");
                 return;
             }
-            if (input != null)
-                output = CaesarCipher.Encrypt(input, shift);
+            int shift = GetShiftValue();
+            output = CaesarCipher.Encrypt(input, shift);
+
             Console.WriteLine("Output: " + output);
         }
 
@@ -44,6 +48,26 @@
                     isValid = true;
             } while (!isValid);
             return input!;
+        }
+
+
+        /// <summary>
+        /// Get shift value for encryption
+        /// </summary>
+        /// <returns>The shift value entered by the user or default </returns>
+        private static int GetShiftValue()
+        {
+            int shift;
+            do
+            {
+                Console.Write($"Enter the shift value (Click 'Enter' to use default {DefaultShift}): ");
+                string? shiftInput = Console.ReadLine();
+                if (string.IsNullOrEmpty(shiftInput))
+                    return DefaultShift;
+                if (!int.TryParse(shiftInput, out shift))
+                    Console.WriteLine($"Invalid shift value provided : {shiftInput} ");
+            } while (shift == 0);
+            return shift;
         }
     }
 }
